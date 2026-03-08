@@ -510,18 +510,17 @@
                 return;
             }
 
-            // Mensaje limpio sin emojis ni el nombre del local
+            // Mensaje limpio sin emojis, sin nombre y sin el total
             let textoMensaje = "Hola, quiero hacer el siguiente pedido:%0A%0A";
-            let totalPedido = 0;
 
             carrito.forEach(item => {
+                // Mantiene el precio individual al lado del plato
                 let precioLinea = item.precio > 0 ? `($${item.precio * item.cantidad})` : '';
-                // Usamos un guion normal en lugar de viñetas o iconos
                 textoMensaje += `- ${item.cantidad}x ${item.nombre} ${precioLinea}%0A`;
-                totalPedido += item.precio * item.cantidad;
             });
 
-            textoMensaje += `%0A*TOTAL: $${totalPedido}*%0A%0A(Dirección / Observaciones: )`;
+            // Agrega solo la parte de la dirección al final
+            textoMensaje += `%0A(Dirección / Observaciones: )`;
 
             const numeroTelefono = "573014389494";
             const urlWhatsApp = `https://wa.me/${numeroTelefono}?text=${textoMensaje}`;
